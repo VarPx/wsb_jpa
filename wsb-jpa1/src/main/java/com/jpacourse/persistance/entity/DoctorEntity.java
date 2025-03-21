@@ -1,8 +1,8 @@
 package com.jpacourse.persistance.entity;
 
 import com.jpacourse.persistance.enums.Specialization;
-
 import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "DOCTOR")
@@ -26,9 +26,16 @@ public class DoctorEntity {
 	@Column(nullable = false)
 	private String doctorNumber;
 
-	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
 	private Specialization specialization;
+
+	// 🔹 Relacja 1:N – Jeden lekarz może mieć wiele wizyt
+	// 🔹 Tabela VISIT przechowuje klucz obcy doctor_id, który wskazuje na DOCTOR(id)
+	@OneToMany(mappedBy = "doctorEntity", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+	private List<VisitEntity> visitEntities;
+
+	// 🔹 Gettery i Settery
 
 	public Long getId() {
 		return id;
@@ -86,4 +93,11 @@ public class DoctorEntity {
 		this.specialization = specialization;
 	}
 
+	public List<VisitEntity> getVisitEntities() {
+		return visitEntities;
+	}
+
+	public void setVisitEntities(List<VisitEntity> visitEntities) {
+		this.visitEntities = visitEntities;
+	}
 }

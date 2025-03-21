@@ -1,6 +1,5 @@
 package com.jpacourse.persistance.entity;
 
-
 import jakarta.persistence.*;
 
 @Entity
@@ -12,13 +11,16 @@ public class AddressEntity {
 	private Long id;
 
 	private String city;
-
 	private String addressLine1;
-
 	private String addressLine2;
-
 	private String postalCode;
 
+	// 🔹 Relacja 1:1 – Jeden adres może należeć tylko do jednego pacjenta
+	// 🔹 `mappedBy = "address"` oznacza, że klucz obcy `address_id` znajduje się w tabeli `PATIENT`
+	@OneToOne(mappedBy = "address")
+	private PatientEntity patient;
+
+	// 🔹 GETTERY i SETTERY
 	public Long getId() {
 		return id;
 	}
@@ -59,4 +61,11 @@ public class AddressEntity {
 		this.postalCode = postalCode;
 	}
 
+	public PatientEntity getPatient() {
+		return patient;
+	}
+
+	public void setPatient(PatientEntity patient) {
+		this.patient = patient;
+	}
 }
