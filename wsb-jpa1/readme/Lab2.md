@@ -16,4 +16,4 @@ Uwaga! Do wykonania zadan konieczne jest zaimplementowanie modelu obiektowo-rela
 
    utworzy nowa encje wizyty i doda ja do pacjenta w jednym wywolaniu - kaskadowy update pacjenta (merge). 
 
-   Npisz test do tej metody (Dao)
+   Napisz test do tej metody (Dao)

@@ -18,9 +18,10 @@ public class VisitEntity {
 	private LocalDateTime time;
 
 	// 🔹 Relacja N:1 – Wizyta należy do jednego doktora
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DOCTOR_IDDDD")
-	private DoctorEntity doctorEntity; // ✅ Poprawiona nazwa zmiennej
+	@ManyToOne
+	@JoinColumn(name = "doctor_id")
+	private DoctorEntity doctorEntity;
+
 
 	// 🔹 Relacja N:1 – Wizyta należy do jednego pacjenta
 	@ManyToOne(fetch = FetchType.LAZY)

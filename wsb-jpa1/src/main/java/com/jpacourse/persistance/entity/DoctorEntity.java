@@ -32,7 +32,11 @@ public class DoctorEntity {
 
 	// 🔹 Relacja 1:N – Jeden lekarz może mieć wiele wizyt
 	// 🔹 Tabela VISIT przechowuje klucz obcy doctor_id, który wskazuje na DOCTOR(id)
-	@OneToMany(mappedBy = "doctorEntity", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+	@OneToMany(
+			mappedBy = "doctorEntity",
+			cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+			fetch = FetchType.LAZY
+	)
 	private List<VisitEntity> visitEntities;
 
 	// 🔹 Gettery i Settery
