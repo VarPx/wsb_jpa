@@ -3,6 +3,8 @@ package com.jpacourse.persistance.entity;
 import java.time.LocalDate;
 import java.util.List;
 import jakarta.persistence.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table(name = "PATIENT")
@@ -33,9 +35,13 @@ public class PatientEntity {
 	@JoinColumn(name = "address_id", referencedColumnName = "id")
 	private AddressEntity address;
 
-	@OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(
+			mappedBy = "patient",
+			cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+			fetch = FetchType.EAGER
+	)
+	@Fetch(FetchMode.JOIN) // na początku SELECT, potem zmienimy na JOIN
 	private List<VisitEntity> visits;
-
 	// 🔹 GETTERY i SETTERY:
 
 	public Long getId() {

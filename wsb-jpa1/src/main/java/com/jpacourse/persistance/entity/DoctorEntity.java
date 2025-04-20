@@ -31,7 +31,6 @@ public class DoctorEntity {
 	private Specialization specialization;
 
 	// 🔹 Relacja 1:N – Jeden lekarz może mieć wiele wizyt
-	// 🔹 Tabela VISIT przechowuje klucz obcy doctor_id, który wskazuje na DOCTOR(id)
 	@OneToMany(
 			mappedBy = "doctorEntity",
 			cascade = {CascadeType.PERSIST, CascadeType.MERGE},
@@ -103,5 +102,10 @@ public class DoctorEntity {
 
 	public void setVisitEntities(List<VisitEntity> visitEntities) {
 		this.visitEntities = visitEntities;
+	}
+
+	// ✅ Aliasowy getter do testów
+	public List<VisitEntity> getVisits() {
+		return visitEntities;
 	}
 }
